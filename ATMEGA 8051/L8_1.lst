@@ -1,0 +1,190 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	E:\Users\wiktor\Desktop\Programowanie\L8_1.asm
+	Object File:	E:\Users\wiktor\Desktop\Programowanie\L8_1.hex
+	List File:	E:\Users\wiktor\Desktop\Programowanie\L8_1.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:	  0000	02 00 50	LJMP INIT
+    2:
+    3:		N      001B	ORG 001BH
+    4:	  001B	02 02 00	LJMP KLAWKA
+    5:
+    6:		N      0050	ORG 50H
+    7:	  0050			INIT:
+    8:	  0050	75 89 10	MOV TMOD,#00010000B
+    9:	  0053	75 88 40	MOV TCON,#01000000B
+   10:	  0056	75 A8 88	MOV IE,#10001000B
+   11:	  0059	75 8B 00	MOV TL1,#00H
+   12:	  005C	75 8D 00	MOV TH1,#00H
+   13:	  005F	75 90 FF	MOV P1, #0FFH
+   14:	  0062	75 A0 FF	MOV P2, #0FFH
+   15:	  0065	02 01 00	LJMP START
+   16:
+   17:		N      0100	ORG 100H
+   18:	  0100			START:
+   19:	  0100	0D		INC R5
+   20:	  0101	02 01 00	LJMP START
+   21:
+   22:		N      0200	ORG 200H
+   23:	  0200			KLAWKA:
+   24:	  0200	75 90 FE	MOV P1, #11111110B; KOLUMNA 1
+   25:	  0203	E5 A0		MOV A, P2
+   26:	  0205	B4 FF 19	CJNE A,#11111111B, KOL1
+   27:
+   28:	  0208	75 90 FD	MOV P1, #11111101B;KOLUMNA 2
+   29:	  020B	E5 A0		MOV A, P2
+   30:	  020D	B4 FF 14	CJNE A,#11111111B, KOL2
+   31:
+   32:	  0210	75 90 FB	MOV P1, #11111011B;KOLUMNA 3
+   33:	  0213	E5 A0		MOV A, P2
+   34:	  0215	B4 FF 0F	CJNE A,#11111111B, KOL3
+   35:
+   36:	  0218	75 90 F7	MOV P1, #11110111B;KOLUMNA 4
+   37:	  021B	E5 A0		MOV A, P2
+   38:	  021D	B4 FF 0A	CJNE A,#11111111B, KOL4
+   39:
+   40:	  0220	32		RETI
+   41:
+   42:	  0221			KOL1:
+   43:	  0221	F5 40		MOV 40H,A
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+   44:	  0223	32		RETI
+   45:	  0224			KOL2:
+   46:	  0224	F5 41		MOV 41H,A
+   47:	  0226	32		RETI
+   48:	  0227			KOL3:
+   49:	  0227	F5 42		MOV 42H,A
+   50:	  0229	32		RETI
+   51:	  022A			KOL4:
+   52:	  022A	F5 43		MOV 43H,A
+   53:	  022C	32		RETI
+   54:				END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CY				  BIT	      D7
+DPH				  DATA	      83
+DPL				  DATA	      82
+EA				  BIT	      AF
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INIT				  CODE	    0050	   7
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+KLAWKA				  CODE	    0200	  23
+KOL1				  CODE	    0221	  42
+KOL2				  CODE	    0224	  45
+KOL3				  CODE	    0227	  48
+KOL4				  CODE	    022A	  51
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS0				  BIT	      D3
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+START				  CODE	    0100	  18
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+WR				  BIT	      B6

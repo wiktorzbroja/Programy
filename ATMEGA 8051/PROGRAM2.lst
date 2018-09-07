@@ -1,0 +1,306 @@
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 1
+
+
+
+
+
+       MCS-51 Family Macro Assembler   A S E M - 5 1   V 1.3
+       =====================================================
+
+
+
+	Source File:	E:\Users\wiktor\Desktop\Programowanie\PROGRAM2.asm
+	Object File:	E:\Users\wiktor\Desktop\Programowanie\PROGRAM2.hex
+	List File:	E:\Users\wiktor\Desktop\Programowanie\PROGRAM2.lst
+
+
+
+ Line  I  Addr  Code            Source
+
+    1:	  0000	79 32		MOV R1, #50D
+    2:	  0002	7A FA		MOV R2, #250D
+    3:	  0004	1D		DEC R5
+    4:		B      00B4	E SET P3.4
+    5:		B      00B5	RS SET P3.5
+    6:	  0005	02 01 00	LJMP INIT
+    7:		N      0023	ORG 0023H
+    8:	  0023	02 01 B9	LJMP PRZE
+    9:
+   10:
+   11:		N      0100	ORG 100H
+   12:	  0100			INIT:
+   13:	  0100	75 98 0A		MOV SCON, #00001010B
+   14:	  0103	75 89 20		MOV TMOD, #00100000B
+   15:	  0106	75 8D FD		MOV TH1, #0FDH
+   16:	  0109	75 88 44		MOV TCON, #01000100B
+   17:	  010C	D2 AF			SETB EA
+   18:	  010E	D2 AC			SETB ES
+   19:
+   20:	  0110	12 01 26		CALL FUNCTION_SET
+   21:	  0113	12 01 35		CALL DISPLAY_OFF
+   22:	  0116	12 01 44		CALL DISPLAY_CLR
+   23:	  0119	12 01 53		CALL ENTR_MOD_SET
+   24:	  011C	12 01 62		CALL DISPLAY_ON
+   25:
+   26:	  011F	02 01 22		LJMP MAIN
+   27:
+   28:	  0122			MAIN:
+   29:	  0122	0F		INC R7
+   30:	  0123	02 01 22	LJMP MAIN
+   31:
+   32:	  0126			FUNCTION_SET:
+   33:	  0126	D2 B4			SETB E
+   34:	  0128	C2 B5			CLR RS
+   35:	  012A	75 90 38		MOV P1, #00111000B;DONE
+   36:	  012D	C2 B4			CLR E
+   37:	  012F	79 32			MOV R1, #50D
+   38:	  0131	12 01 AB		CALL SLEEP50
+   39:	  0134	22		RET
+   40:
+   41:	  0135			DISPLAY_OFF:
+   42:	  0135	D2 B4			SETB E
+   43:	  0137	C2 B5			CLR RS
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 2
+
+
+
+ Line  I  Addr  Code            Source
+
+   44:	  0139	75 90 08		MOV P1, #00001000B;DONE
+   45:	  013C	C2 B4			CLR E
+   46:	  013E	79 32			MOV R1, #50D
+   47:	  0140	12 01 AB		CALL SLEEP50
+   48:	  0143	22		RET
+   49:
+   50:	  0144			DISPLAY_CLR:
+   51:	  0144	D2 B4			SETB E
+   52:	  0146	C2 B5			CLR RS
+   53:	  0148	75 90 01		MOV P1,#000000001 ;DONE
+   54:	  014B	C2 B4			CLR E
+   55:	  014D	7A FA			MOV R2, #250D
+   56:	  014F	12 01 AE		CALL SLEEP2000
+   57:	  0152	22		RET
+   58:
+   59:	  0153			ENTR_MOD_SET:
+   60:	  0153	D2 B4			SETB E
+   61:	  0155	C2 B5			CLR RS
+   62:	  0157	75 90 06		MOV P1,#00000110B ;DONE
+   63:	  015A	C2 B4			CLR E
+   64:	  015C	79 32			MOV R1, #50D
+   65:	  015E	12 01 AB		CALL SLEEP50
+   66:	  0161	22		RET
+   67:
+   68:	  0162			DISPLAY_ON:
+   69:	  0162	D2 B4			SETB E
+   70:	  0164	C2 B5			CLR RS
+   71:	  0166	75 90 0F		MOV P1,#00001111B;DONE
+   72:	  0169	C2 B4			CLR E
+   73:	  016B	79 32			MOV R1, #50D
+   74:	  016D	12 01 AB		CALL SLEEP50
+   75:	  0170	22		RET
+   76:
+   77:	  0171			DDRAM_SET:
+   78:	  0171	D2 B4			SETB E
+   79:	  0173	C2 B5			CLR RS
+   80:	  0175	75 90 C0		MOV P1,#11000000B;DONE
+   81:	  0178	C2 B4			CLR E
+   82:	  017A	79 32			MOV R1, #50D
+   83:	  017C	12 01 AB		CALL SLEEP50
+   84:	  017F	22		RET
+   85:
+   86:	  0180			DDRAM_SET2:
+   87:	  0180	D2 B4			SETB E
+   88:	  0182	C2 B5			CLR RS
+   89:	  0184	75 90 80		MOV P1,#10000000B;DONE
+   90:	  0187	C2 B4			CLR E
+   91:	  0189	79 32			MOV R1, #50D
+   92:	  018B	12 01 AB		CALL SLEEP50
+   93:	  018E			DISP:
+   94:	  018E	D2 B4			SETB E
+   95:	  0190	D2 B5			SETB RS
+   96:	  0192	F5 90			MOV P1, A
+   97:	  0194	C2 B4			CLR E
+   98:	  0196	79 32			MOV R1, #50D
+   99:	  0198	12 01 AB		CALL SLEEP50
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 3
+
+
+
+ Line  I  Addr  Code            Source
+
+  100:	  019B	0D			INC R5
+  101:	  019C	BD 10 02		CJNE R5,#10H,WYJSCIE
+  102:	  019F	31 71			CALL DDRAM_SET
+  103:	  01A1				WYJSCIE:
+  104:	  01A1	BD 21 06		CJNE R5,#21H,WYJSCIE2
+  105:	  01A4	7D 00			MOV R5, #00H
+  106:	  01A6	31 44			CALL DISPLAY_CLR
+  107:	  01A8	31 80			CALL DDRAM_SET2
+  108:	  01AA				WYJSCIE2:
+  109:
+  110:	  01AA	22		RET
+  111:
+  112:	  01AB			SLEEP50:
+  113:	  01AB	D9 FE			DJNZ R1, SLEEP50
+  114:	  01AD	22		RET
+  115:
+  116:	  01AE			SLEEP2000:
+  117:	  01AE	00		NOP
+  118:	  01AF	00		NOP
+  119:	  01B0	00		NOP
+  120:	  01B1	00		NOP
+  121:	  01B2	00		NOP
+  122:	  01B3	00		NOP
+  123:	  01B4	00		NOP
+  124:	  01B5	00		NOP
+  125:	  01B6	DA F6			DJNZ R2, SLEEP2000
+  126:	  01B8	22		RET
+  127:
+  128:	  01B9			PRZE:
+  129:				;Umiescic ten kod w swoim programie
+  130:
+  131:				;Procedura obslugi przerwania od portu szeregowego
+  132:	  01B9	E5 99			MOV A, SBUF
+  133:	  01BB	F5 50			MOV 50H, A 	; Pod adresem 50H w internal RAM znajdzie sie kod nacisnietego znaku
+  134:	  01BD	F5 99			MOV SBUF, A
+  135:	  01BF	B4 03 06		CJNE A,#03H,KONT
+  136:	  01C2	31 44			CALL DISPLAY_CLR
+  137:	  01C4	31 80			CALL DDRAM_SET2
+  138:	  01C6	7D 01			MOV R5,#01H
+  139:	  01C8				KONT:
+  140:	  01C8	31 8E			CALL DISP
+  141:	  01CA	C2 99			CLR TI
+  142:	  01CC	C2 98			CLR RI
+  143:
+  144:	  01CE	32		RETI
+  145:
+  146:
+  147:				END
+
+
+
+
+
+                     register banks used:  ---
+
+                     no errors
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 4
+
+
+
+
+
+
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 5
+
+
+
+
+
+	       L I S T   O F   S Y M B O L S
+	       =============================
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+??ASEM_51			  NUMBER    8051
+??VERSION			  NUMBER    0130
+AC				  BIT	      D6
+ACC				  DATA	      E0
+B				  DATA	      F0
+CY				  BIT	      D7
+DDRAM_SET			  CODE	    0171	  77
+DDRAM_SET2			  CODE	    0180	  86
+DISP				  CODE	    018E	  93
+DISPLAY_CLR			  CODE	    0144	  50
+DISPLAY_OFF			  CODE	    0135	  41
+DISPLAY_ON			  CODE	    0162	  68
+DPH				  DATA	      83
+DPL				  DATA	      82
+E				  NUMBER    00B4	   4
+EA				  BIT	      AF
+ENTR_MOD_SET			  CODE	    0153	  59
+ES				  BIT	      AC
+ET0				  BIT	      A9
+ET1				  BIT	      AB
+EX0				  BIT	      A8
+EX1				  BIT	      AA
+EXTI0				  CODE	    0003
+EXTI1				  CODE	    0013
+F0				  BIT	      D5
+FUNCTION_SET			  CODE	    0126	  32
+IE				  DATA	      A8
+IE0				  BIT	      89
+IE1				  BIT	      8B
+INIT				  CODE	    0100	  12
+INT0				  BIT	      B2
+INT1				  BIT	      B3
+IP				  DATA	      B8
+IT0				  BIT	      88
+IT1				  BIT	      8A
+KONT				  CODE	    01C8	 139
+MAIN				  CODE	    0122	  28
+OV				  BIT	      D2
+P				  BIT	      D0
+P0				  DATA	      80
+P1				  DATA	      90
+P2				  DATA	      A0
+P3				  DATA	      B0
+PCON				  DATA	      87
+PRZE				  CODE	    01B9	 128
+PS				  BIT	      BC
+PSW				  DATA	      D0
+PT0				  BIT	      B9
+PT1				  BIT	      BB
+PX0				  BIT	      B8
+
+ASEM-51 V1.3                                         Copyright (c) 2002 by W.W. Heinz                                         PAGE 6
+
+
+
+SYMBOL				  TYPE     VALUE	LINE
+------------------------------------------------------------
+PX1				  BIT	      BA
+RB8				  BIT	      9A
+RD				  BIT	      B7
+REN				  BIT	      9C
+RESET				  CODE	    0000
+RI				  BIT	      98
+RS				  NUMBER    00B5	   5
+RS0				  BIT	      D3
+RS1				  BIT	      D4
+RXD				  BIT	      B0
+SBUF				  DATA	      99
+SCON				  DATA	      98
+SINT				  CODE	    0023
+SLEEP2000			  CODE	    01AE	 116
+SLEEP50				  CODE	    01AB	 112
+SM0				  BIT	      9F
+SM1				  BIT	      9E
+SM2				  BIT	      9D
+SP				  DATA	      81
+T0				  BIT	      B4
+T1				  BIT	      B5
+TB8				  BIT	      9B
+TCON				  DATA	      88
+TF0				  BIT	      8D
+TF1				  BIT	      8F
+TH0				  DATA	      8C
+TH1				  DATA	      8D
+TI				  BIT	      99
+TIMER0				  CODE	    000B
+TIMER1				  CODE	    001B
+TL0				  DATA	      8A
+TL1				  DATA	      8B
+TMOD				  DATA	      89
+TR0				  BIT	      8C
+TR1				  BIT	      8E
+TXD				  BIT	      B1
+WR				  BIT	      B6
+WYJSCIE				  CODE	    01A1	 103
+WYJSCIE2			  CODE	    01AA	 108
